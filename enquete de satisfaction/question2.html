@@ -1,0 +1,69 @@
+<!-- question2.html -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Question 2</title>
+</head>
+
+<body>
+    <h1>Page de Questions 2</h1>
+    <form id="question2Form">
+        <!-- Question 1 : Cases à cocher -->
+        <h2>Quel type de chaussures préférez-vous ?</h2>
+        <label>
+            <input type="checkbox" name="chaussures" value="baskets"> Baskets
+        </label>
+        <label>
+            <input type="checkbox" name="chaussures" value="chaussures habillées"> Chaussures habillées
+        </label>
+        <label>
+            <input type="checkbox" name="chaussures" value="sandales"> Sandales
+        </label>
+
+        <!-- Question 2 : Boutons radio -->
+        <h2>Préférez-vous les pantalons ou les jupes ?</h2>
+        <label>
+            <input type="radio" name="preference" value="pantalons"> Pantalons
+        </label>
+        <label>
+            <input type="radio" name="preference" value="jupes"> Jupes
+        </label>
+
+        <!-- Question de note de satisfaction -->
+        <h2>Sur une échelle de 1 à 10, à quel point êtes-vous satisfait de ces questions ?</h2>
+        <label for="satisfaction">Note de satisfaction :</label>
+        <input type="number" id="satisfaction" min="1" max="10" required>
+
+        <button type="button" id="nextButton">Suivant</button>
+    </form>
+
+    <script>
+        document.getElementById('nextButton').addEventListener('click', function () {
+            // Récupérez les réponses à la première question (cases à cocher)
+            const chaussures = [];
+            const checkboxesChaussures = document.querySelectorAll('input[name="chaussures"]:checked');
+            checkboxesChaussures.forEach((checkbox) => {
+                chaussures.push(checkbox.value);
+            });
+
+            // Récupérez la réponse à la deuxième question (boutons radio)
+            const preference = document.querySelector('input[name="preference"]:checked').value;
+
+            // Récupérez la réponse à la note de satisfaction
+            const satisfaction = document.getElementById('satisfaction').value;
+
+            // Vous pouvez stocker ces réponses dans un objet pour les utiliser ultérieurement
+            const responses = {
+                chaussures,
+                preference,
+                satisfaction
+            };
+
+            // Redirigez l'utilisateur vers la prochaine page de questions
+            window.location.href = 'question3.html';
+        });
+    </script>
+</body>
+
+</html>

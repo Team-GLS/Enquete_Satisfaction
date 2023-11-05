@@ -1,0 +1,75 @@
+<!-- question1.html -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Question 1</title>
+</head>
+
+<body>
+    <h1>Page de Questions</h1>
+    <form id="question1Form">
+        <!-- Question 1 : Liste déroulante -->
+        <h2>Comment avez-vous connu l'entreprise ?</h2>
+        <label for="connuEntreprise">Choisissez une option :</label>
+        <select id="connuEntreprise">
+            <option value="publicite">Publicité</option>
+            <option value="ami">Un ami</option>
+            <option value="rechercheInternet">Recherche Internet</option>
+        </select>
+
+        <!-- Question 2 : Cases à cocher -->
+        <h2>Quels produits vous intéressent ?</h2>
+        <label>
+            <input type="checkbox" name="interets" value="chaussures"> Les chaussures
+        </label>
+        <label>
+            <input type="checkbox" name="interets" value="pantalons"> Les pantalons
+        </label>
+        <label>
+            <input type="checkbox" name="interets" value="sweats"> Les sweats
+        </label>
+        <label>
+            <input type="checkbox" name="interets" value="accessoires"> Les accessoires
+        </label>
+        <label>
+            <input type="checkbox" name="interets" value="ceintures"> Les ceintures
+        </label>
+
+        <!-- Question 3 : Échelle de notation de 1 à 10 -->
+        <h2>Sur une échelle de 1 à 10, à quel point êtes-vous satisfait des réponses précédentes ?</h2>
+        <label for="satisfaction">Note de satisfaction :</label>
+        <input type="number" id="satisfaction" min="1" max="10" required>
+
+        <button type="button" id="nextButton">Suivant</button>
+    </form>
+
+    <script>
+        document.getElementById('nextButton').addEventListener('click', function () {
+            // Récupérez les réponses à la première question
+            const connuEntreprise = document.getElementById('connuEntreprise').value;
+
+            // Récupérez les réponses à la deuxième question (cases à cocher)
+            const interets = [];
+            const checkboxes = document.querySelectorAll('input[name="interets"]:checked');
+            checkboxes.forEach((checkbox) => {
+                interets.push(checkbox.value);
+            });
+
+            // Récupérez la réponse à la troisième question (note de satisfaction)
+            const satisfaction = document.getElementById('satisfaction').value;
+
+            // Vous pouvez stocker ces réponses dans un objet pour les utiliser ultérieurement
+            const responses = {
+                connuEntreprise,
+                interets,
+                satisfaction
+            };
+
+            // Redirigez l'utilisateur vers la prochaine page de questions
+            window.location.href = 'question2.html';
+        });
+    </script>
+</body>
+
+</html>

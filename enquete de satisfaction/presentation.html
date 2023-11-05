@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Présentation Graphique des Données</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <h1>Présentation Graphique des Données</h1>
+
+    <!-- Créez un élément canvas pour le graphique -->
+    <canvas id="surveyChart" width="400" height="200"></canvas>
+
+    <script>
+        // Récupération des données du fichier JSON (en utilisant AJAX ou autre méthode)
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', '/saveData/result.json', true);
+
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                const surveyData = JSON.parse(xhr.responseText);
+                createChart(surveyData);
+            }
+        };
+
+        xhr.send();
+
+        function createChart(surveyData) {
+            const ctx = document.getElementById('surveyChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Moyenne'],
+                    datasets: [{
+                        label: 'Satisfaction',
+                        data: [surveyData.average],
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 3, // Remplacez par le maximum attendu
+                            stepSize: 1 // Si vous souhaitez des échelles spécifiques
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

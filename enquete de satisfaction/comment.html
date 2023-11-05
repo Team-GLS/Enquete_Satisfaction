@@ -1,0 +1,55 @@
+<!-- comment.html -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Commentaire de Satisfaction</title>
+</head>
+
+<body>
+    <h1>Commentaire de Satisfaction</h1>
+    <!-- Affichage du nom et du prénom à partir des cookies -->
+    <div id="userName"></div>
+    <form>
+        <label for="comment">Laissez votre commentaire :</label>
+        <textarea id="comment" rows="4" cols="50" required></textarea><br>
+
+        <button type="button" id="submitButton">Soumettre</button>
+    </form>
+
+    <script>
+        // JavaScript pour enregistrer le commentaire
+        document.getElementById('submitButton').addEventListener('click', function () {
+            const comment = document.getElementById('comment').value;
+
+            // Obtenez la note actuelle depuis les cookies
+            const note = parseFloat(getCookie('score')) || 0;
+
+            // Créez un objet pour les données de l'utilisateur actuel
+            const userData = {
+                firstName: firstName,
+                lastName: lastName,
+                email: email, // Assurez-vous d'obtenir l'email depuis les cookies si nécessaire
+                comment: comment,
+                note: note, // Incluez la note
+            };
+
+            // Effectuez une requête POST pour enregistrer les données
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/saveData', true);
+            xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Redirection vers la page de présentation graphique des données
+                    window.location.href = 'presentation.html';
+                }
+            };
+
+            xhr.send(JSON.stringify(userData));
+        });
+
+    </script>
+</body>
+
+</html>

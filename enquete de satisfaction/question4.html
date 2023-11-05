@@ -1,0 +1,108 @@
+<!-- question4.html -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Question 4</title>
+</head>
+
+<body>
+    <h1>Page de Questions</h1>
+    <form id="question4Form">
+        <!-- Question 1 : Liste déroulante -->
+        <h2>Quelle est votre couleur préférée ?</h2>
+        <label for="couleurPreference">Choisissez une option :</label>
+        <select id="couleurPreference">
+            <option value="rouge">Rouge</option>
+            <option value="bleu">Bleu</option>
+            <option value="vert">Vert</option>
+        </select>
+
+        <!-- Question 2 : Boutons radio -->
+        <h2>Préférez-vous les pantalons ou les jupes ?</h2>
+        <label>
+            <input type="radio" name="preference" value="pantalons"> Pantalons
+        </label>
+        <label>
+            <input type="radio" name="preference" value="jupes"> Jupes
+        </label>
+
+        <!-- Question 3 : Cases à cocher -->
+        <h2>Quels types de chaussures possédez-vous ?</h2>
+        <label>
+            <input type="checkbox" name="chaussures" value="baskets"> Baskets
+        </label>
+        <label>
+            <input type="checkbox" name="chaussures" value="chaussures habillées"> Chaussures habillées
+        </label>
+        <label>
+            <input type="checkbox" name="chaussures" value="sandales"> Sandales
+        </label>
+
+
+        <!-- Question 5 : Achèterez-vous un produit chez nous ? -->
+        <h2>Achèterez-vous un produit chez nous ?</h2>
+        <label>
+            <input type="radio" name="achat" value="oui"> Oui
+        </label>
+        <label>
+            <input type="radio" name="achat" value="non"> Non
+        </label>
+
+        <!-- Question 6 : Prévoyez-vous de venir chez nous plusieurs fois ? -->
+        <h2>Prévoyez-vous de venir chez nous plusieurs fois ?</h2>
+        <label>
+            <input type="radio" name="visites" value="oui"> Oui
+        </label>
+        <label>
+            <input type="radio" name="visites" value="non"> Non
+        </label>
+
+        <!-- Question 4 : Note de satisfaction -->
+        <h2>Sur une échelle de 1 à 10, à quel point êtes-vous satisfait de ces questions ?</h2>
+        <label for="satisfaction">Note de satisfaction :</label>
+        <input type="number" id="satisfaction" min="1" max="10" required>
+
+        <button type="button" id="nextButton">Suivant</button>
+    </form>
+
+    <script>
+        document.getElementById('nextButton').addEventListener('click', function () {
+            // Vérifiez d'abord si les réponses aux questions précédentes sont correctes
+            const couleurPreference = document.getElementById('couleurPreference').value;
+            const preference = document.querySelector('input[name="preference"]:checked');
+            const checkboxesChaussures = document.querySelectorAll('input[name="chaussures"]:checked');
+
+            if (!couleurPreference || !preference || checkboxesChaussures.length === 0) {
+                alert("Veuillez répondre à toutes les questions précédentes.");
+                return; // Ne passez pas à la question suivante tant que toutes les réponses ne sont pas fournies.
+            }
+
+            // Si toutes les réponses précédentes sont correctes, passez à la page de sauvegarde des données
+            const satisfaction = document.getElementById('satisfaction').value;
+
+            const achat = document.querySelector('input[name="achat"]:checked');
+            const visites = document.querySelector('input[name="visites"]:checked');
+
+            if (!achat || !visites) {
+                alert("Veuillez répondre aux nouvelles questions.");
+                return;
+            }
+
+            const responses = {
+                couleurPreference,
+                preference: preference.value,
+                chaussures: Array.from(checkboxesChaussures).map(checkbox => checkbox.value),
+                satisfaction,
+                achat: achat.value,
+                visites: visites.value
+            };
+
+            // Redirigez l'utilisateur vers la page de sauvegarde des données
+            window.location.href = 'saveData/saveData.html';
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,89 @@
+<!-- identification.html -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Identification</title>
+</head>
+
+<body>
+    <h1>Page d'Identification</h1>
+    <form id="identificationForm">
+        <label for="firstName">Prénom:</label>
+        <input type="text" id="firstName" required><br>
+
+        <label for="lastName">Nom:</label>
+        <input type="text" id="lastName" required><br>
+
+        <label for="age">Âge:</label>
+        <input type="number" id="age" required><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" required><br>
+
+        <label for="phone">Téléphone:</label>
+        <input type="tel" id="phone" required><br>
+
+        <label for="birthdate">Date de Naissance:</label>
+        <input type="date" id="birthdate" required><br>
+
+        <!-- Ajoutez ici les champs spécifiques à votre contexte entreprise -->
+        <label for="pointure">Pointure:</label>
+        <input type="text" id="pointure"><br>
+
+        <label for="taille">Taille:</label>
+        <input type="text" id="taille"><br>
+
+        <button type="button" id="nextButton">Suivant</button>
+    </form>
+
+    <script>
+        // Génération d'un index utilisateur unique (à partir de 1, 2, 3, etc.)
+        document.getElementById('nextButton').addEventListener('click', function () {
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const age = document.getElementById('age').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const birthdate = document.getElementById('birthdate').value;
+            const pointure = document.getElementById('pointure').value;
+            const taille = document.getElementById('taille').value;
+
+            // Storing data in cookies
+            document.cookie = `firstName=${firstName}`;
+            document.cookie = `lastName=${lastName}`;
+            document.cookie = `age=${age}`;
+            document.cookie = `email=${email}`;
+            document.cookie = `phone=${phone}`;
+            document.cookie = `birthdate=${birthdate}`;
+            document.cookie = `pointure=${pointure}`;
+            document.cookie = `taille=${taille}`;
+
+            const data = {
+                firstName,
+                lastName,
+                age,
+                email,
+                phone,
+                birthdate,
+                pointure,
+                taille,
+            };
+
+            fetch('saveData.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+                .then(response => response.text())
+                .then(data => console.log(data))
+                .catch((error) => console.error('Error:', error));
+        });
+    </script>
+
+</body>
+
+</html>
