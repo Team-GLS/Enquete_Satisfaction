@@ -55,6 +55,10 @@
             
             // Encodez la réponse en paramètre d'URL
             const encodedSatisfaction = encodeURIComponent(satisfaction);
+
+            // Récupérez la note de satisfaction depuis le paramètre d'URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const satisfaction = urlParams.get('satisfaction');
             
             // Vous pouvez stocker ces réponses dans un objet pour les utiliser ultérieurement
             const responses = {
