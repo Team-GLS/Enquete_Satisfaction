@@ -7,6 +7,16 @@
 </head>
 
 <body>
+
+    <script>
+        // Récupérez la note de satisfaction depuis le paramètre d'URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const satisfaction = urlParams.get('satisfaction');
+    
+        // Utilisez la valeur de satisfaction comme bon vous semble
+        console.log('Satisfaction:', satisfaction);
+    </script>
+    
     <h1>Page de Questions</h1>
     <form id="question3Form">
         <!-- Question 1 : Liste déroulante -->
