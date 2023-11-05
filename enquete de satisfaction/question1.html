@@ -59,6 +59,9 @@
             // Récupérez la réponse à la troisième question (note de satisfaction)
             const satisfaction = document.getElementById('satisfaction').value;
 
+             // Encodez la réponse en paramètre d'URL
+            const encodedSatisfaction = encodeURIComponent(satisfaction);
+
             // Vous pouvez stocker ces réponses dans un objet pour les utiliser ultérieurement
             const responses = {
                 connuEntreprise,
@@ -67,7 +70,7 @@
             };
 
             // Redirigez l'utilisateur vers la prochaine page de questions
-            window.location.href = 'question2.html';
+            window.location.href = 'question2.html' + encodedSatisfaction;
         });
     </script>
 </body>
