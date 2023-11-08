@@ -5,3 +5,4 @@ Technologies utilisées:
   Gestion du projet sur Jira
   Interface visuelle développée en HTML / CSS / JavaScript
   Serveur développé en PHP
+  Données graphiques affichées grâce à Chart JS
